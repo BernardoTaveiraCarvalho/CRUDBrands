@@ -26,6 +26,7 @@ class CarController extends Controller
      */
     public function create()
     {
+
         $brand = Brand::all();
         return view('pages.cars.create',['brand'=>$brand]);
     }

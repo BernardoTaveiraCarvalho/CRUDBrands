@@ -17,7 +17,7 @@ class UserSeeder extends Seeder
                 'email_verified_at' =>now(),
                 'password' =>bcrypt('123456'),
                 'admin'=>1,
-                'create_at'=>now(),
+                'created_at'=>now(),
                 'updated_at'=>now(),
             ]);
 

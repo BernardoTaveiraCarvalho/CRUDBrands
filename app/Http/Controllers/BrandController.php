@@ -5,7 +5,10 @@ namespace App\Http\Controllers;
 use App\Brand;
 use App\Car;
 use Illuminate\Http\Request;
-
+use App\Exports\BrandsExport;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Imports\BrandsImport;
+use App\Http\Controllers\Controller;
 class BrandController extends Controller
 {
 
@@ -27,6 +30,7 @@ class BrandController extends Controller
 
     public function create()
     {
+
         return view('pages.brands.create');
     }
 
@@ -77,6 +81,15 @@ class BrandController extends Controller
             return redirect('brands')->with('status', $a->getMessage());
         }
     }
+    public function export()
+    {
+        return Excel::download(new BrandsExport, 'brands.xlsx');
+    }
+    public function import()
+    {
+        Excel::import(new BrandsImport, 'C:/brands.xlsx');
 
+        return redirect('/')->with('success', 'All good!');
+    }
 
 }

@@ -2,18 +2,22 @@
          array(
          "title"=> 'Brand',
          "href"=> '/brands',
+        "auth"=> "no",
          ),
          array(
          "title"=> 'Create Brand',
          "href"=> '/brands/create',
+        "auth"=> "yeas",
          ),
          array(
          "href"=> '/cars',
          "title"=> 'Car',
+            "auth"=> "no",
          ),
           array(
          "title"=> 'Create Car',
          "href"=> '/cars/create',
+           "auth"=> "yeas",
          ),
      ),'active'=>'Brand'])
 

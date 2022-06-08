@@ -19,8 +19,12 @@
         <th scope="col">Created_at</th>
         <th scope="col">Updated_at</th>
         <th scope="col">Show</th>
+        @auth
         <th scope="col">Edit</th>
-        <th scope="col">Delete</th>
+            @if (Illuminate\Support\Facades\Auth::user() &&  Illuminate\Support\Facades\Auth::user()->admin == 1)
+                <th scope="col">Delete</th>
+            @endif
+        @endauth
     </tr>
     </thead>
     <tbody>
@@ -33,13 +37,19 @@
             <td>{{$obj->brand->name}}</td>
             <td>{{$obj->created_at}}</td>
             <td>{{$obj->updated_at}}</td>
+
             <td><a class="btn btn-success" href="{{url('cars/'.$obj->id)}}" role="button">Show</a></td>
+            @auth
             <td><a class="btn btn-primary" href="{{url('cars/'.$obj->id.'/edit')}}" role="button">Edit</a></td>
-            <form action="{{url('cars/' . $obj->id)}}" method="POST">
+                @if (Illuminate\Support\Facades\Auth::user() &&  Illuminate\Support\Facades\Auth::user()->admin == 1)
+
+                <form action="{{url('cars/' . $obj->id)}}" method="POST">
                 @csrf
                 @method('DELETE')
                 <td>  <button type="submit" class="btn btn-danger">Delete</button></td>
             </form>
+                @endif
+            @endauth
         </tr>
     @endforeach
 

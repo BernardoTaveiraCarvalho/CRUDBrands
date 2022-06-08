@@ -1,3 +1,4 @@
+
 <h1>{{$title}}</h1>
 @if (session('status'))
     <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -16,8 +17,12 @@
         <th scope="col">Created_at</th>
         <th scope="col">Updated_at</th>
         <th scope="col">Show</th>
+        @auth
         <th scope="col">Edit</th>
-        <th scope="col">Delete</th>
+            @if (Illuminate\Support\Facades\Auth::user() &&  Illuminate\Support\Facades\Auth::user()->admin == 1)
+            <th scope="col">Delete</th>
+            @endif
+        @endauth
     </tr>
     </thead>
     <tbody>
@@ -27,16 +32,26 @@
             <td>{{$obj->name}}</td>
             <td>{{$obj->created_at}}</td>
             <td>{{$obj->updated_at}}</td>
+
             <td><a class="btn btn-success" href="{{url('brands/'.$obj->id)}}" role="button">Show</a></td>
+            @auth
             <td><a class="btn btn-primary" href="{{url('brands/'.$obj->id.'/edit')}}" role="button">Edit</a></td>
+                @if (Illuminate\Support\Facades\Auth::user() &&  Illuminate\Support\Facades\Auth::user()->admin == 1)
+
+
             <form action="{{url('brands/' . $obj->id)}}" method="POST">
                 @csrf
                 @method('DELETE')
                 <td>  <button type="submit" class="btn btn-danger">Delete</button></td>
             </form>
+                @endif
+
+            @endauth
         </tr>
     @endforeach
 
     </tbody>
 </table>
 {{$object->links()}}
+<a class="btn btn-success" href="{{url('brands/export')}}" role="button">ExportAll</a>
+<a class="btn btn-success" href="{{url('brands/import')}}" role="button">Import</a>

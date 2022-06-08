@@ -11,8 +11,12 @@
                 <li class="nav-item @if($array['title']===$active)active @endif">
                     <a class="nav-link" href="{{url($array['href'])}}">{{$array['title']}}</a>
                 </li>
-            @endforeach
 
+            @endforeach
+                @guest
+                    <a class="nav-link" href="{{url("/login")}}">Login</a>
+                    <a class="nav-link" href="{{url("/register")}}">Register</a>
+                @endguest
         </ul>
         <form action="{{ url('/players') }}" method="GET">
             <input class="form-control mr-sm-2" type="text" name="search" placeholder="search" aria-label="Search">
