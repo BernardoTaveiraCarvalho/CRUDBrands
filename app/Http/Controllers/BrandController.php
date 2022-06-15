@@ -85,11 +85,13 @@ class BrandController extends Controller
     {
         return Excel::download(new BrandsExport, 'brands.xlsx');
     }
-    public function import()
+    public function import(Request $request)
     {
-        Excel::import(new BrandsImport, 'C:/brands.xlsx');
+        $file= $request->file('file');
 
-        return redirect('/')->with('success', 'All good!');
+        Excel::import(new BrandsImport, $file);
+
+        return redirect('/brands')->with('success', 'All good!');
     }
 
 }

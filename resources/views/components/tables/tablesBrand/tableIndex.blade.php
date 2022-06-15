@@ -54,4 +54,11 @@
 </table>
 {{$object->links()}}
 <a class="btn btn-success" href="{{url('brands/export')}}" role="button">ExportAll</a>
-<a class="btn btn-success" href="{{url('brands/import')}}" role="button">Import</a>
+<form action="{{url('brands/import')}}" method="POST" enctype="multipart/form-data">
+    @csrf
+
+    <div class="form.group">
+        <input type="file" name="file"/>
+        <button type="submit" class="btn btn-primary">Import</button>
+    </div>
+</form>

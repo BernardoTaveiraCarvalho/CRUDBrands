@@ -21,7 +21,7 @@ Auth::routes();
 
 
 Route::get('brands/export', 'BrandController@export');
-Route::get('brands/import', 'BrandController@import');
+Route::post('brands/import', 'BrandController@import');
 
 Route::group(['middleware'=>'auth'],function(){
     Route::group(['middleware'=>'admin'],function(){
