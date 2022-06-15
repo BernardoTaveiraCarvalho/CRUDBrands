@@ -6,9 +6,11 @@ use App\Brand;
 use App\Car;
 use Illuminate\Http\Request;
 use App\Exports\BrandsExport;
+use Illuminate\Support\Facades\Storage;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Imports\BrandsImport;
 use App\Http\Controllers\Controller;
+
 class BrandController extends Controller
 {
 
@@ -50,7 +52,7 @@ class BrandController extends Controller
             $imagePath =$request->file('image');
             $imageName=$brand->id . '_' . time() . '_' . $imagePath->getClientOriginalName();
 
-            $path= $request->file('image')->storeAs('images/brands'. -$brand->id,$imageName,'public');
+            $path= $request->file('image')->storeAs('images/brands/'. $brand->id,$imageName,'public');
             $brand->image=$path;
         }
         $brand->save();
@@ -84,6 +86,7 @@ class BrandController extends Controller
         try {
             $brand = Brand::findOrFail($brand->id);
             $brand->delete();
+            Storage::deleteDirectory('public/images/brands/'.$brand->id);
             return redirect('brands')->with('status', 'Item deleted successfully!');
         } catch (ModelNotFoundException $e) {
             return redirect('brands')->with('status', 'Item not deleted successfully!');

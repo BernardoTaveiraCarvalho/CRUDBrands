@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Storage;
 
 class BrandSeeder extends Seeder
 {
@@ -11,7 +12,7 @@ class BrandSeeder extends Seeder
      */
     public function run()
     {
-
+        Storage::deleteDirectory('public/images');
         $arrayName= array(
             'BMW','Mercedes','Pocaontas','Panamera'
         );
