@@ -1,9 +1,12 @@
-<form method="POST" action="{{ url('brands/' . $brand->id) }}">
+<form method="POST" action="{{ url('brands/' . $brand->id) }}" enctype="multipart/form-data">
     @csrf
     @method('PUT')
     @foreach($obj as $array)
         <div class="form-group">
             <label class="h3" for="{{$array['title']}}" >{{strtoupper($array['title'])}}</label>
+            @if($array['type']=="image")
+               <p> <image src="{{asset('storage/'.$array['value'])}}" > </image></p>
+            @else
             @if($array['type']=='textarea')
                 <textarea rows="6"
             @endif
@@ -34,6 +37,7 @@
                 </span>
             @enderror
         </div>
+        @endif
     @endforeach
     <button type="submit" class="mt-2 mb-5 btn btn-primary">Edit</button>
 </form>

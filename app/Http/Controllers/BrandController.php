@@ -76,7 +76,17 @@ class BrandController extends Controller
 
     public function update(Request $request, Brand $brand)
     {
-        $brand->update($request->all());
+
+        $brand->name = $request->name;
+        if($request->file('image')){
+            if ($request->image) Storage::delete('public' . $brand->id);
+            $imagePath =$request->file('image');
+            $imageName=$brand->id . '_' . time() . '_' . $imagePath->getClientOriginalName();
+
+            $path= $request->file('image')->storeAs('images/brands/'. $brand->id,$imageName,'public');
+            $brand->image=$path;
+        }
+        $brand->save();
         return redirect('brands')->with('status','Item edited successfully!');
     }
 

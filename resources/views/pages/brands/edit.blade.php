@@ -31,6 +31,20 @@
         'type'=>'text',
         'require'=>1,
     ),
+    array(
+        'title'=>'image',
+        'value'=>$brand->image,
+        'name'=>'img',
+        'type'=>'image',
+        'require'=>1,
+    ),
+     array(
+        'title'=>'image',
+        'value'=>'',
+        'name'=>'image',
+        'type'=>'file',
+        'require'=>1,
+    ),
     )])
     @endcomponent
 @endsection
