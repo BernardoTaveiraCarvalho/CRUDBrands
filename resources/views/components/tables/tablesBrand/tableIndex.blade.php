@@ -14,6 +14,7 @@
     <tr>
         <th scope="col">Id</th>
         <th scope="col">Name</th>
+        <th scope="col">Image</th>
         <th scope="col">Created_at</th>
         <th scope="col">Updated_at</th>
         <th scope="col">Show</th>
@@ -30,6 +31,13 @@
         <tr>
             <th scope="row">{{$obj->id}}</th>
             <td>{{$obj->name}}</td>
+            <td>
+            @if($obj->image)
+            <image src="{{asset('storage/'.$obj->image)}}"> </image>
+            @else
+                No image
+            @endif
+                </td>
             <td>{{$obj->created_at}}</td>
             <td>{{$obj->updated_at}}</td>
 

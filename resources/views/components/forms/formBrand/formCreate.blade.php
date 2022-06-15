@@ -1,4 +1,4 @@
-<form method="POST" action="{{ url('brands') }}">
+<form method="POST" action="{{ url('brands') }}" enctype="multipart/form-data">
     @csrf
     @foreach($obj as $array)
         <div class="form-group">

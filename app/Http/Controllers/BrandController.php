@@ -37,13 +37,23 @@ class BrandController extends Controller
 
     public function store(Request $request)
     {
+
         $this->validate($request, [
             'name'        => 'required',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
+        $brand = new Brand();
+        $brand->name = $request->name;
+        $brand->save();
 
-        Brand::create([
-            'name'        => $request->name,
-        ]);
+        if($request->file('image')){
+            $imagePath =$request->file('image');
+            $imageName=$brand->id . '_' . time() . '_' . $imagePath->getClientOriginalName();
+
+            $path= $request->file('image')->storeAs('images/brands'. -$brand->id,$imageName,'public');
+            $brand->image=$path;
+        }
+        $brand->save();
 
         /*Player::create($request->all());*/
         return redirect('brands')->with('status','Item created!');

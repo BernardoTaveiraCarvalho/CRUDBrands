@@ -30,6 +30,12 @@
         'type'=>'text',
         'require'=>1,
     ),
+    array(
+        'title'=>'Image',
+        'name'=>'image',
+        'type'=>'file',
+        'require'=>1,
+    ),
     )])
     @endcomponent
 @endsection
